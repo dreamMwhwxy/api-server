@@ -2,8 +2,11 @@
  * 文章管理路由的处理函数
  */
 
+// 导入数据库操作模块
 const db = require('../db/index')
 
+// 导入处理路径的核心模块
+const path = require('path')
 // 发布新文章的处理函数
 
 // 发布新文章的处理函数
@@ -14,7 +17,13 @@ exports.addArticle = (req, res) => {
     // 手动判断是否上传了文章封面
     if (!req.file || req.file.fieldname !== 'cover_img') return res.cc('文章封面是必选参数！')
 
-    // TODO：表单数据合法，继续后面的处理流程...
+    
+    console.log("************************");
+    console.log(req.file);
+    console.log('2' +req.file.fieldname);
+    const sql = `insert into ev_articles set ?`;
+
+
     const articleInfo = {
         // 标题、内容、状态、所属的分类Id
         ...req.body,
@@ -25,11 +34,6 @@ exports.addArticle = (req, res) => {
         // 文章作者的Id
         author_id: req.user.id,
     }
-
-    const sql = `insert into ev_articles set ?`
-    // 导入数据库操作模块
-    
-
     // 执行 SQL 语句
     db.query(sql, articleInfo, (err, results) => {
         // 执行 SQL 语句失败

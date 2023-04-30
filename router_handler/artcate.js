@@ -12,7 +12,7 @@ exports.getArtCates = (req, res) => {
     db.query(sql, (err, results) => {
         if (err) return res.cc(err);
         res.send({
-            statle: 0,
+            status: 0,
             message: '获取文章分类列表成功！',
             data: results,
         })

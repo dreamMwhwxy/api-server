@@ -23,7 +23,7 @@ exports.getuserInfo = (req, res) => {
         res.send({
             status: 0,
             message: '获取用户信息成功！',
-            date: results[0],
+            data: results[0],
         })
     });
 }
